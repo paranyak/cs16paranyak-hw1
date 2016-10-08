@@ -122,4 +122,56 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(expResult, actualResult, 0.00001);
     }
 
+    @Test
+    public void testTempClosestToZeroWithOneElementArray() {
+        // setup input data and expected result
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -1.0;
+
+        // call tested method
+        double actualResult = seriesAnalysis.findTempClosestToZero();
+
+        // compare expected result with actual result
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testTempClosestToZero()  {
+        double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 1.0;
+
+        double actualResult = seriesAnalysis.findTempClosestToZero();
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testTempClosestToZeroSecond() {
+        double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0, -7.0, 3.7, -1.0, 10.0, 0.5};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 0.5;
+
+        double actualResult = seriesAnalysis.findTempClosestToZero();
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testzeroWithEmptyArray() {
+        double[] temperatureSeries = {};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+
+        // expect exception here
+        seriesAnalysis.findTempClosestToZero();
+    }
+    @Test
+    public void testTempClosestToZeroThird() {
+        double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0, -7.0, 3.7, -1.0, 10.0, 0.5, -0.25};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -0.25;
+
+        double actualResult = seriesAnalysis.findTempClosestToZero();
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
 }

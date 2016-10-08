@@ -51,7 +51,21 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToZero() {
-        return 0;
+        double veryClose = Math.abs(temperatureSeries[0]);
+        double close = 0;
+        for(int i = 0; i < temperatureSeries.length; i++){
+            if(Math.abs(temperatureSeries[i]) < veryClose){
+                veryClose = Math.abs(temperatureSeries[i]);
+            }
+        }
+        for(int i = 0;i < temperatureSeries.length; i++){
+            if (temperatureSeries[i] == veryClose){
+                close = veryClose;
+            }
+        }if(close == 0){
+            close = -veryClose;
+        }
+        return close;
     }
 
     public double findTempClosestToValue(double tempValue) {
