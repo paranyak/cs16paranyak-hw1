@@ -9,7 +9,7 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         this.temperatureSeries = temperatureSeries;
-        if(temperatureSeries.length == 0)
+        if (temperatureSeries.length == 0)
             throw new IllegalArgumentException();
 
     }
@@ -17,10 +17,10 @@ public class TemperatureSeriesAnalysis {
     public double average() {
 
         double average_number = 0;
-        for(int i = 0; i < temperatureSeries.length; i++){
+        for (int i = 0; i < temperatureSeries.length; i++) {
             average_number += temperatureSeries[i];
-            }
-        average_number = average_number/temperatureSeries.length;
+        }
+        average_number = average_number / temperatureSeries.length;
         return average_number;
     }
 
@@ -28,23 +28,26 @@ public class TemperatureSeriesAnalysis {
         return 0;
     }
 
-    /*public double min() {
-        double min_number = 0;
-        int i, j;
-        for (i = 1; i < temperatureSeries.length; i++) {
-            newValue = temperatureSeries[i];
-            j = i;
-            while (j > 0 && temperatureSeries[j - 1] > newValue) {
-                temperatureSeries[j] = temperatureSeries[j - 1];
-                j--;
+    public double min() {
+        double min_number = temperatureSeries[0];
+        int i;
+        for (i = 0; i < temperatureSeries.length; i++) {
+            if (temperatureSeries[i] < min_number) {
+                min_number = temperatureSeries[i];
             }
-            temperatureSeries[j] = newValue;
         }
         return min_number;
-    }*/
+    }
 
     public double max() {
-        return 0;
+        double max_number = temperatureSeries[0];
+        int i;
+        for (i = 0; i < temperatureSeries.length; i++) {
+            if (temperatureSeries[i] > max_number) {
+                max_number = temperatureSeries[i];
+            }
+        }
+        return max_number;
     }
 
     public double findTempClosestToZero() {
