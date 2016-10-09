@@ -114,14 +114,29 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
-        return null;
+
+        double [] myArray = new double[temperatureSeries.length];
+        int counter = 0;
+        for(int i = 0; i < temperatureSeries.length; i++){
+            if(temperatureSeries[i] >= tempValue){
+                myArray[counter] = temperatureSeries[i];
+                counter++;
+            }
+        }
+        double [] greaterArray = new double[counter];
+        for(int i = 0; i < counter; i++){
+            greaterArray[i] = myArray[i];
+        }
+        return greaterArray;
     }
 
     public TempSummaryStatistics summaryStatistics() {
+
         return null;
     }
 
     public int addTemps(double... temps) {
+
         return 0;
     }
 }
