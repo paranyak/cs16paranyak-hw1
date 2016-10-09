@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.sql.Array;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysisTest {
 
@@ -362,4 +363,53 @@ public class TemperatureSeriesAnalysisTest {
         // compare expected result with actual result
         assertEquals(Arrays.toString(expResult), Arrays.toString(actualResult));
     }
+    @Test(expected = InputMismatchException.class)
+    public void testAddingFail() {
+        double[] temperatureSeries = {15.9, 10.0, 19.7};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+
+        // expect exception here
+        seriesAnalysis.addTemps(1.3,-212, -556.9, 3.0);
+    }
+    @Test
+    public void testTempAddingOneSimple() {
+        double[] temperatureSeries = {-2.0, -4.0, 4.0, 7.0, 3.0, 10.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        int expResult = 69;
+        int actualResult = seriesAnalysis.addTemps(10.0, 11.0, 12.0, 18.0);
+
+        assertEquals(expResult,actualResult);
+
+    }
+    @Test
+    public void testTempAddingBigger() {
+        double[] temperatureSeries = {-2.0, -4.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        int expResult = 69;
+        int actualResult = seriesAnalysis.addTemps(10.0, 11.0, 12.0, 18.0, 4.0, 7.0, 3.0, 10.0);
+
+        assertEquals(expResult, actualResult);
+    }
+    @Test
+    public void testTempAddingEmpty() {
+        double[] temperatureSeries = {-2.0, -4.0, 10.0, 11.0, 12.0, 18.0, 4.0, 7.0, 3.0, 10.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        int expResult = 69;
+        int actualResult = seriesAnalysis.addTemps();
+
+        assertEquals(expResult, actualResult);
+    }
+    @Test
+    public void testTempAddingZero() {
+        double[] temperatureSeries = {-2.0, -4.0, 10.0, 11.0, 12.0, 18.0, 4.0, 7.0, 3.0, 10.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        int expResult = 0;
+        int actualResult = seriesAnalysis.addTemps(2.0, 4.0, -10.0, -11.0, -12.0, -18.0, -4.0, -7.0, -3.0, -10.0);
+
+        assertEquals(expResult, actualResult);
+    }
+
+
+
+
 }
