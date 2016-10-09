@@ -408,8 +408,53 @@ public class TemperatureSeriesAnalysisTest {
 
         assertEquals(expResult, actualResult);
     }
+    @Test
+    public void testDeviationOne() {
+        double[] temperatureSeries = {9, 2, 5, 4, 12, 7};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 3.61939;
 
+        double actualResult = seriesAnalysis.deviation();
 
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testDeviationTwo() {
+        double[] temperatureSeries = {1.0, 2.0, 3.0, 4.0, 5.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 1.58114;
 
+        double actualResult = seriesAnalysis.deviation();
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testDeviationThreeNeg() {
+        double[] temperatureSeries = {-1.0, -2.0, -3.0, -4.0, -5.0, -7.0, -90.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 32.69047;
+
+        double actualResult = seriesAnalysis.deviation();
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testDeviationFourSame() {
+        double[] temperatureSeries = {3.0, 3.0, 3.0, 3.0, 3.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 0;
+
+        double actualResult = seriesAnalysis.deviation();
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeviationWithEmptyArray() {
+        double[] temperatureSeries = {};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+
+        // expect exception here
+        seriesAnalysis.deviation();
+    }
 
 }

@@ -19,16 +19,30 @@ public class TemperatureSeriesAnalysis {
 
     public double average() {
 
-        double average_number = 0;
+        double avgTemp = 0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            average_number += temperatureSeries[i];
+            avgTemp += temperatureSeries[i];
         }
-        average_number = average_number / temperatureSeries.length;
-        return average_number;
+        avgTemp = avgTemp / temperatureSeries.length;
+        return avgTemp;
     }
 
     public double deviation() {
-        return 0;
+        double devTemp = 0;
+        double sumAll = 0;
+        double squareValue = 0;
+        double sumSquareVal = 0;
+        for(int i = 0; i < temperatureSeries.length; i++){
+            sumAll += temperatureSeries[i];
+        }
+        double mean = sumAll/temperatureSeries.length;
+        for(int i = 0; i < temperatureSeries.length; i++){
+            squareValue = Math.pow((temperatureSeries[i] - mean), 2);
+            sumSquareVal += squareValue;
+        }
+        double varience = sumSquareVal/(temperatureSeries.length-1);
+        devTemp = Math.sqrt(varience);
+        return devTemp;
     }
 
     public double min() {
@@ -43,14 +57,14 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double max() {
-        double max_number = temperatureSeries[0];
+        double maxTemp = temperatureSeries[0];
         int i;
         for (i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] > max_number) {
-                max_number = temperatureSeries[i];
+            if (temperatureSeries[i] > maxTemp) {
+                maxTemp = temperatureSeries[i];
             }
         }
-        return max_number;
+        return maxTemp;
     }
 
     public double findTempClosestToZero() {
