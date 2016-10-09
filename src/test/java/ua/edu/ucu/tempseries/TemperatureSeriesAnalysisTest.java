@@ -3,6 +3,9 @@ package ua.edu.ucu.tempseries;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.sql.Array;
+import java.util.Arrays;
+
 public class TemperatureSeriesAnalysisTest {
 
     @Test
@@ -235,5 +238,66 @@ public class TemperatureSeriesAnalysisTest {
         // compare expected result with actual result
         assertEquals(expResult, actualResult, 0.00001);
     }
+    @Test(expected = IllegalArgumentException.class)
+    public void testLessWithEmptyArray() {
+        double[] temperatureSeries = {};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
+        // expect exception here
+        seriesAnalysis.findTempsLessThen(9.0);
+    }
+    @Test
+    public void testTempLessThenOne() {
+        double[] temperatureSeries = {-2.0, 22.0, 9.0, 1.0, 3.0, 56.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double [] expResult = {-2.0, 9.0, 1.0, 3.0};
+        double [] actualResult = seriesAnalysis.findTempsLessThen(10.0);
+
+        assertEquals(Arrays.toString(expResult), Arrays.toString(actualResult));
+
+    }
+    @Test
+    public void testTempLessThenTwo() {
+        double[] temperatureSeries = {-2.0, 22.0, 9.0, 1.0, 3.0, 56.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double [] expResult = {-2.0,1.0, 3.0};
+        double [] actualResult = seriesAnalysis.findTempsLessThen(5.0);
+
+        assertEquals(Arrays.toString(expResult), Arrays.toString(actualResult));
+
+    }
+
+    @Test
+    public void testTempLessThenThree() {
+        double[] temperatureSeries = {-2.0, -2.5, -9.0, -1.0, -3.0, -5.0, -6.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double [] expResult = {-2.0, -2.5, -9.0, -1.0, -3.0, -5.0, -6.0};
+        double [] actualResult = seriesAnalysis.findTempsLessThen(10.0);
+
+        assertEquals(Arrays.toString(expResult), Arrays.toString(actualResult));
+
+    }
+    @Test
+    public void testTempLessThenFour() {
+        double[] temperatureSeries = {-2.0, 14.0, 4.0, 7.0, 3.0, 10.0, -2.5};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double [] expResult = {-2.5};
+        double [] actualResult = seriesAnalysis.findTempsLessThen(-2.1);
+
+        assertEquals(Arrays.toString(expResult), Arrays.toString(actualResult));
+
+    }
+    @Test
+    public void testTempLessThenWithOneElementArray() {
+        // setup input data and expected result
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double [] expResult = {-1.0};
+
+        // call tested method
+        double [] actualResult = seriesAnalysis.findTempsLessThen(9.0);
+
+        // compare expected result with actual result
+        assertEquals(Arrays.toString(expResult), Arrays.toString(actualResult));
+    }
 }

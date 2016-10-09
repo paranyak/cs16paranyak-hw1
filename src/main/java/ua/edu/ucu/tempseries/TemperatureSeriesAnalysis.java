@@ -98,7 +98,19 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsLessThen(double tempValue) {
-        return null;
+        double [] myArray = new double[temperatureSeries.length];
+        int counter = 0;
+        for(int i = 0; i < temperatureSeries.length; i++){
+            if(temperatureSeries[i] < tempValue){
+                myArray[counter] = temperatureSeries[i];
+                counter++;
+            }
+        }
+        double [] lessArray = new double[counter];
+        for(int i = 0; i < counter; i++){
+            lessArray[i] = myArray[i];
+        }
+        return lessArray;
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
