@@ -146,8 +146,8 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-
-        return null;
+        TempSummaryStatistics firstT = new TempSummaryStatistics(average(), min(), max(), deviation());
+        return firstT;
     }
 
     public int addTemps(double... temps) {

@@ -456,5 +456,51 @@ public class TemperatureSeriesAnalysisTest {
         // expect exception here
         seriesAnalysis.deviation();
     }
+    @Test
+    public void testTempSummaryStatistics() {
+        double[] temperatureSeries = {-2.0, -4.0, 1.0, 5.0, 14.0, -3.0, 19.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TempSummaryStatistics expResult = new TempSummaryStatistics(4.28571, -4.0, 19.0, 8.97616);
+        TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
+
+        assertEquals(expResult.avgTemp, actualResult.avgTemp, 0.00001);
+        assertEquals(expResult.minTmp, actualResult.minTmp, 0.00001);
+        assertEquals(expResult.maxTmp, actualResult.maxTmp, 0.00001);
+        assertEquals(expResult.devTmp, actualResult.devTmp, 0.00001);
+    }
+    @Test
+    public void testTempSummaryStatisticsOne() {
+        double[] temperatureSeries = {1.0, -1.0, 4.0, -4.0, 7.0, -7.0, 10.0, -10.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TempSummaryStatistics expResult = new TempSummaryStatistics(0, -10.0, 10.0, 6.88684);
+        TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
+
+        assertEquals(expResult.avgTemp, actualResult.avgTemp, 0.00001);
+        assertEquals(expResult.minTmp, actualResult.minTmp, 0.00001);
+        assertEquals(expResult.maxTmp, actualResult.maxTmp, 0.00001);
+        assertEquals(expResult.devTmp, actualResult.devTmp, 0.00001);
+    }
+    @Test
+    public void testTempSummaryStatisticsTwo() {
+        double[] temperatureSeries = {1.0, -1.0, 1.0, -1.0, 1.0, -1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TempSummaryStatistics expResult = new TempSummaryStatistics(0, -1.0, 1.0, 1.09545);
+        TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
+
+        assertEquals(expResult.avgTemp, actualResult.avgTemp, 0.00001);
+        assertEquals(expResult.minTmp, actualResult.minTmp, 0.00001);
+        assertEquals(expResult.maxTmp, actualResult.maxTmp, 0.00001);
+        assertEquals(expResult.devTmp, actualResult.devTmp, 0.00001);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testTempSummaryWithEmptyArray() {
+        double[] temperatureSeries = {};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+
+        // expect exception here
+        seriesAnalysis.summaryStatistics();
+    }
+
+
 
 }
