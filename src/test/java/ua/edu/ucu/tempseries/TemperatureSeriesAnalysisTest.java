@@ -463,11 +463,12 @@ public class TemperatureSeriesAnalysisTest {
         TempSummaryStatistics expResult = new TempSummaryStatistics(4.28571, -4.0, 19.0, 8.97616);
         TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
 
-        assertEquals(expResult.avgTemp, actualResult.avgTemp, 0.00001);
-        assertEquals(expResult.minTmp, actualResult.minTmp, 0.00001);
-        assertEquals(expResult.maxTmp, actualResult.maxTmp, 0.00001);
-        assertEquals(expResult.devTmp, actualResult.devTmp, 0.00001);
+        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getMinTmp(), actualResult.getMinTmp(), 0.00001);
+        assertEquals(expResult.getMaxTmp(), actualResult.getMaxTmp(), 0.00001);
+        assertEquals(expResult.getDevTmp(), actualResult.getDevTmp(), 0.00001);
     }
+
     @Test
     public void testTempSummaryStatisticsOne() {
         double[] temperatureSeries = {1.0, -1.0, 4.0, -4.0, 7.0, -7.0, 10.0, -10.0};
@@ -475,10 +476,10 @@ public class TemperatureSeriesAnalysisTest {
         TempSummaryStatistics expResult = new TempSummaryStatistics(0, -10.0, 10.0, 6.88684);
         TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
 
-        assertEquals(expResult.avgTemp, actualResult.avgTemp, 0.00001);
-        assertEquals(expResult.minTmp, actualResult.minTmp, 0.00001);
-        assertEquals(expResult.maxTmp, actualResult.maxTmp, 0.00001);
-        assertEquals(expResult.devTmp, actualResult.devTmp, 0.00001);
+        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getMinTmp(), actualResult.getMinTmp(), 0.00001);
+        assertEquals(expResult.getMaxTmp(), actualResult.getMaxTmp(), 0.00001);
+        assertEquals(expResult.getDevTmp(), actualResult.getDevTmp(), 0.00001);
     }
     @Test
     public void testTempSummaryStatisticsTwo() {
@@ -487,10 +488,10 @@ public class TemperatureSeriesAnalysisTest {
         TempSummaryStatistics expResult = new TempSummaryStatistics(0, -1.0, 1.0, 1.09545);
         TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
 
-        assertEquals(expResult.avgTemp, actualResult.avgTemp, 0.00001);
-        assertEquals(expResult.minTmp, actualResult.minTmp, 0.00001);
-        assertEquals(expResult.maxTmp, actualResult.maxTmp, 0.00001);
-        assertEquals(expResult.devTmp, actualResult.devTmp, 0.00001);
+        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getMinTmp(), actualResult.getMinTmp(), 0.00001);
+        assertEquals(expResult.getMaxTmp(), actualResult.getMaxTmp(), 0.00001);
+        assertEquals(expResult.getDevTmp(), actualResult.getDevTmp(), 0.00001);
     }
     @Test(expected = IllegalArgumentException.class)
     public void testTempSummaryWithEmptyArray() {
